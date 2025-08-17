@@ -1,0 +1,36 @@
+{
+  "name": "petclinic",
+  "version": "1.0.0",
+  "description": "ui automation",
+  "keywords": [
+    "HoMoZea4722%?"
+  ],
+  "homepage": "https://github.com/MichaelNkong/AdessoPetClinicUIAutomation#readme",
+  "bugs": {
+    "url": "https://github.com/MichaelNkong/AdessoPetClinicUIAutomation/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelNkong/AdessoPetClinicUIAutomation.git"
+  },
+  "license": "ISC",
+  "author": "MichaelNkong",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "allure:report": "allure generate allure-results --clean -o allure-report",
+    "allure:clear": "rimraf allure-results allure-report",
+    "allure:open": "npm run allure:report && allure open allure-report",
+    "UI_TEST": "npm run allure:clear && npm test && npm run allure:report"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.54.2",
+    "@types/node": "^24.3.0",
+    "allure-playwright": "^3.3.3",
+    "rimraf": "^6.0.1"
+  },
+  "dependencies": {
+    "axios": "^1.11.0"
+  }
+}
