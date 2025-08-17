@@ -1,0 +1,7 @@
+ 
+{
+  "Pet": [
+    { "Name": "Nana", "BirthDate": "2010-10-03" },
+     { "Name": "Niko", "BirthDate": "2020-12-01" }
+  ]
+}

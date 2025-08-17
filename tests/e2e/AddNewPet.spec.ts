@@ -3,9 +3,9 @@ import { LandingPage } from '../../pages/LandingPage';
 import { BasePage } from '../../pages/BasePage';
 import { OwnersPage } from '../../pages/OwnersPage';
 import { PetPage } from '../../pages/PetPage';
-import owners from '../../core/test-data/owners.json';
 import { DatePicker } from '../../core/utils/DatePicker';
-
+import pets from '../../core/test-data/pet.json';
+import owners from '../../core/test-data/owners.json';
 test.describe('New Pet', () => {
  
 let landingPage: LandingPage;
@@ -23,17 +23,17 @@ let datePicker : DatePicker;
   })
 
   
-  test('Search Owner by Last name  and Add New Pet', async ({ page }) => {
+  test('Search Owner by Last name and Add New Pet', async ({ page }) => {
     await  landingPage.clickFindOwners();
-        await ownerPage.fillLasNameInInputField('Nkongho');
+        await ownerPage.fillLasNameInInputField(owners.Owners[1].lastName);
              await ownerPage.clickFindOwnersButton();
-                await ownerPage.checkOwnersInOwnerInformation('Michael Nkongho');
+                await ownerPage.checkOwnersInOwnerInformation((owners.Owners[1].firstName+' '+ owners.Owners[1].lastName));
                  await ownerPage.clickAddNewPetLink();   
-                    await petPage.fillPetName("Pauli");    
+                    await petPage.fillPetName(pets.Pet[1].Name);    
                          await petPage.selectPetType();     
-                            await  datePicker.fillbirthDate("2020-12-01");  
+                            await  datePicker.fillbirthDate(pets.Pet[1].BirthDate);  
                                  await petPage.clickAddPetBtn();
-                                    expect(await ownerPage.verifyPetAddedToPetsAndVisit('Pauli')).toBeTruthy();
+                                    expect(await ownerPage.verifyPetAddedToPetsAndVisit(pets.Pet[1].Name)).toBeTruthy();
   });
    
 
