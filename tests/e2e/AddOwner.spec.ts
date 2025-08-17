@@ -15,7 +15,7 @@ let ownerPage: OwnersPage;
     ownerPage = new OwnersPage(page);
     await basePage.gotoURL();
   })
-  test.only('Click Find Owners and verify Owner on page', async ({ page }) => {
+  test('Click Find Owners and verify Owner on page', async ({ page }) => {
     await  landingPage.clickFindOwners();
             await ownerPage.fillLasNameInInputField(owners.Owners[0].lastName);
                 await ownerPage.clickFindOwnersButton();
