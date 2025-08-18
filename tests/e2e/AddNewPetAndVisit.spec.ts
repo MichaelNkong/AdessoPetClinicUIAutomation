@@ -6,6 +6,7 @@ import { PetPage } from '../../pages/PetPage';
 import { DatePicker } from '../../core/utils/DatePicker';
 import pets from '../../core/test-data/pet.json';
 import owners from '../../core/test-data/owners.json';
+import { VisitLabels } from '../../core/enums/visit-labels.enum';
 test.describe('New Pet', () => {
  test.describe.configure({ mode: 'serial' });
  
@@ -46,19 +47,19 @@ let datePicker : DatePicker;
     }
   });
    
-let vistData: string = "This is a visit description";
+
   
-  test('Search Owner by Last name and Add Vist', async ({ page }) => {
+  test('Search Owner by Last name and Add Visit', async ({ page }) => {
     if(await  landingPage.clickFindOwners()){
         await ownerPage.fillLasNameInInputField(owners.Owners[2].lastName);
              await ownerPage.clickFindOwnersButton();
                 await ownerPage.checkOwnersInOwnerInformation((owners.Owners[2].firstName+' '+ owners.Owners[2].lastName));
                   await ownerPage.clickLinkTextByText(owners.Owners[2].firstName+' '+ owners.Owners[2].lastName);  
-                       await ownerPage.clickLinkTextByText("Add Visit", 0); 
+                       await ownerPage.clickLinkTextByText(VisitLabels.addVisitBtn, 0); 
                               // await  datePicker.fillbirthDate(pets.Pet[1].BirthDate);  
-                                  await petPage.fillVisitDescription(vistData);
+                                  await petPage.fillVisitDescription(VisitLabels.description);
                                     await petPage.adVisitBtn.click();
-                                       expect(await petPage.checkNewVisitInTable(vistData)).toBeTruthy();
+                                       expect(await petPage.checkNewVisitInTable(VisitLabels.description)).toBeTruthy();
                    
  
                     
