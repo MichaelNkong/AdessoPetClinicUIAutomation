@@ -1,4 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
+import { OwnerLabels } from '../core/enums/owner-labels.enum';
 
 // This class represents the Pet page of the application
 // It contains locators for elements on the Pet page and methods to interact with them
@@ -15,7 +16,7 @@ export class PetPage {
         this.petName = page.locator("input#name");
         this.petType = page.locator("select#type");
         this.desciption = page.locator("input#description");
-        this.adVisitBtn = page.getByRole('button', { name: 'Add Visit' });
+        this.adVisitBtn = page.getByRole('button', { name: OwnerLabels.addvisitlink });
         this.vistData = page.locator('table.table-condensed');
 
 

@@ -1,6 +1,8 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { text } from 'stream/consumers';
-
+import { FindLabels } from '../core/enums/find-labels.enum';
+import { OwnerLabels } from '../core/enums/owner-labels.enum';
+import { PetLabels } from '../core/enums/pet-labels.enum';
 // This class represents the Owners page of the application
 // It contains locators for elements on the Owners page and methods to interact with them
 export class OwnersPage {
@@ -29,14 +31,14 @@ export class OwnersPage {
     this.city = page.locator('#city');
     this.telephone = page.locator('#telephone');
     this.ownersInformation = page.locator("//table[@class ='table table-striped']");
-    this.findOwnerBtn = page.getByRole('button', { name: 'Find Owner' });
-    this.addOwnerBtn = page.getByRole('button', { name: 'Add Owner' });
-    this.addOwnerLink = page.getByRole('link', { name: 'Add Owner' });
+    this.findOwnerBtn = page.getByRole('button', { name: FindLabels.findownerbtn });
+    this.addOwnerBtn = page.getByRole('button', { name: FindLabels.addownerbtn });
+    this.addOwnerLink = page.getByRole('link', { name: FindLabels.addownerbtn });
     this.countTableEntries = page.locator("//table[@class ='table table-striped']//tbody//tr");
     this.petName = page.locator("input#name");
-    this.addNewPetLink = page.getByRole('link', { name: 'Add New Pet' });
+    this.addNewPetLink = page.getByRole('link', { name: OwnerLabels.addnewpetlink });
     this.petTableLocator = page.locator('dl.dl-horizontal');
-    this.addPetbtn = page.getByRole('button', { name: 'Add Pet' });
+    this.addPetbtn = page.getByRole('button', { name: PetLabels.addpetBtn });
   
   }
 
