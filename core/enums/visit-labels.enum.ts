@@ -5,7 +5,5 @@
 // This makes the code more readable and maintainable
 // The VisitLabels enum contains labels related to visits in the application
 export enum VisitLabels{
-    description = "This is a visit description",
-    date  = "18.05.2025",
     addVisitBtn = "Add Visit",
 }
