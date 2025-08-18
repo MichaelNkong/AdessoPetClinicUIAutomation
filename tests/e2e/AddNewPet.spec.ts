@@ -21,7 +21,9 @@ let datePicker : DatePicker;
     ownerPage = new OwnersPage(page);
     await basePage.gotoURL();
   })
-
+// This test clicks on the Find Owners link, fills in the last name input field,
+// clicks the Find Owners button, and verifies that the owner information is displayed correctly
+// It checks that the count of table rows is as expected and that the owner's name is present in the owner information
   
   test('Search Owner by Last name and Add New Pet', async ({ page }) => {
     await  landingPage.clickFindOwners();

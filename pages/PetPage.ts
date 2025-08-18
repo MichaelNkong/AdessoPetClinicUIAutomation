@@ -1,6 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
 
-
+// This class represents the Pet page of the application
+// It contains locators for elements on the Pet page and methods to interact with them
 export class PetPage {
     readonly page: Page;
     readonly petName: Locator;
@@ -29,10 +30,13 @@ export class PetPage {
     async fillPetName(input: string) {
         await this.petName.type(input);
     }
+    // This function selects a pet type from the dropdown
+    // Default is 'dog', but can be changed to any other type like 'cat', 'bird', etc.
     async selectPetType(petType: string = 'dog') {
         await this.petType.click();
         await this.petType.selectOption({ value: petType });
     }
+    // This function clicks on the Add Pet button on the owners page
     async clickAddPetBtn() {
         await this.addPetbtn.click();
     }

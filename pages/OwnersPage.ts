@@ -1,7 +1,8 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { text } from 'stream/consumers';
 
-
+// This class represents the Owners page of the application
+// It contains locators for elements on the Owners page and methods to interact with them
 export class OwnersPage {
   readonly page: Page;
   readonly lastNameInput: Locator;
@@ -84,9 +85,12 @@ export class OwnersPage {
   }
 
 
-  //pets are contained in the element dl with class dl-horizontal.
-  //  get all elements and loop through all dl elements
-  //  and then loop through sub elements to check the expected text
+ /**
+     * This function verifies if pet has been added to table pet and visit.
+      * @param petPropertyToCheck specifies the property of the pet to be checked in the table
+      * @return boolean indicating if the pet property was found in the table
+      * 
+     */
   async verifyPetAddedToPetsAndVisit(petPropertyToCheck: any) {
     let textFound: boolean = false;
     const dlCount = await this.petTableLocator.count();
@@ -107,6 +111,14 @@ export class OwnersPage {
     }
     return textFound;
   }
+
+   /**
+     * This function verifies if owners information is displayed in the table
+     * @param index specifies the index of the table because we have multiple tables(information has index 0)
+      * @param petPropertyToCheck specifies the property of the pet to be checked in the table
+      * @return boolean indicating if the pet property was found in the table
+      * 
+     */
   
   async checkOwnersInOwnerInformation(petPropertyToCheck: string,index:number = 0) {
     let textFound: boolean = false;
