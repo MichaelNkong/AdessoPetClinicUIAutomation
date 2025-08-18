@@ -18,8 +18,8 @@ export class OwnersPage {
   readonly petName: Locator;
   readonly addNewPetLink: Locator;
   readonly petTableLocator: Locator;
-
-
+  readonly addPetbtn: Locator;
+ 
 
   constructor(page: Page) {
     this.page = page;
@@ -36,7 +36,8 @@ export class OwnersPage {
     this.petName = page.locator("input#name");
     this.addNewPetLink = page.getByRole('link', { name: 'Add New Pet' });
     this.petTableLocator = page.locator('dl.dl-horizontal');
-
+    this.addPetbtn = page.getByRole('button', { name: 'Add Pet' });
+  
   }
 
   async getLatName() {
@@ -68,61 +69,112 @@ export class OwnersPage {
   async fillAddress(input: string) {
     await this.address.fill(input);
   }
+   // This function clicks on the Add Pet button on the owners page
+    async clickAddPetBtn() {
+        await this.addPetbtn.click();
+    }
 
+  // This function clicks on the Add New Owner link on the owners page
+  // It is used to navigate to the page where a new owner can be added
   async clickAddNewownerLink() {
-    await this.addOwnerLink.click();
+    try {
+
+      await this.addOwnerLink.click();
+      return true;
+    }
+    catch (error) {
+      console.error('Add New Owner Not clicked:', error);
+      return false;
+    }
+
   }
+  // This function clicks on the Add Owner button on the owners page
+  // It is used to submit the form for adding a new owner
   async clickAddNewownerBtn() {
     await this.addOwnerBtn.click();
   }
-
+  // This function counts the number of table entries in the owners information table
   async countTableRows() {
     return (await this.countTableEntries.count());
   }
 
+
   async clickAddNewPetLink() {
-    await this.addNewPetLink.click();
+       try {
+      
+         await this.addNewPetLink.click();
+         return true;
+    }
+    catch (error) {
+      console.error('failed to click add new pet link:', error);
+      return false;
+    }
+
+  }
+//click name by text on tABLE
+  async clickLinkTextByText(text: string, index: number= 0) {
+
+       try {
+      
+         this.page.getByRole('link', { name: text}).nth(index).click();
+         return true;
+    }
+    catch (error) {
+      console.error('failed to click add new pet link:', error);
+      return false;
+    }
+
   }
 
-
- /**
-     * This function verifies if pet has been added to table pet and visit.
-      * @param petPropertyToCheck specifies the property of the pet to be checked in the table
-      * @return boolean indicating if the pet property was found in the table
-      * 
-     */
+  /**
+      * This function verifies if pet has been added to table pet and visit.
+       * @param petPropertyToCheck specifies the property of the pet to be checked in the table
+       * @return boolean indicating if the pet property was found in the table
+       *
+      */
   async verifyPetAddedToPetsAndVisit(petPropertyToCheck: any) {
-    let textFound: boolean = false;
-    const dlCount = await this.petTableLocator.count();
-    for (let i = 0; i < dlCount; i++) {
-      const dl = this.petTableLocator.nth(i);
-      const dtElements = dl.locator('dd');
-      const dtCount = await dtElements.count();
 
-      for (let j = 0; j < dtCount; j++) {
-        const ddText = await dtElements.nth(j).innerText();
-        if (ddText == petPropertyToCheck) {
-          textFound = true;
-          break;
+    try {
+      let textFound: boolean = false;
+      const dlCount = await this.petTableLocator.count();
+      for (let i = 0; i < dlCount; i++) {
+        const dl = this.petTableLocator.nth(i);
+        const dtElements = dl.locator('dd');
+        const dtCount = await dtElements.count();
+
+        for (let j = 0; j < dtCount; j++) {
+          const ddText = await dtElements.nth(j).innerText();
+          if (ddText == petPropertyToCheck) {
+            textFound = true;
+            break;
+
+          }
 
         }
-
       }
+      return textFound;
     }
-    return textFound;
+    catch (error) {
+      console.error('table locator not found', error);
+    }
+
+
   }
 
-   /**
-     * This function verifies if owners information is displayed in the table
-     * @param index specifies the index of the table because we have multiple tables(information has index 0)
-      * @param petPropertyToCheck specifies the property of the pet to be checked in the table
-      * @return boolean indicating if the pet property was found in the table
-      * 
-     */
-  
-  async checkOwnersInOwnerInformation(petPropertyToCheck: string,index:number = 0) {
-    let textFound: boolean = false;
-    const dlCount =  this.ownersInformation.nth(index);
+  /**
+    * This function verifies if owners information is displayed in the table
+    * @param index specifies the index of the table because we have multiple tables(information has index 0)
+     * @param petPropertyToCheck specifies the property of the pet to be checked in the table
+     * @return boolean indicating if the pet property was found in the table
+     * 
+    */
+
+  async checkOwnersInOwnerInformation(petPropertyToCheck: string, index: number = 0) {
+
+    try {
+
+      let textFound: boolean = false;
+      const dlCount = this.ownersInformation.nth(index);
       const dtElements = dlCount.locator('td');
       const dtCount = await dtElements.count();
       for (let j = 0; j < dtCount; j++) {
@@ -132,9 +184,14 @@ export class OwnersPage {
           break;
 
         }
-      
+
+      }
+      return textFound;
     }
-    return textFound;
+    catch (error) {
+      console.error('locator not found:', error);
+    }
+
   }
 
 

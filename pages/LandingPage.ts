@@ -22,8 +22,14 @@ export class LandingPage {
    * This function clicks on the Find Owners button on the landing page.
    */
   async clickFindOwners() {
-
-    await this.findowner.click();
+    try {
+         await this.findowner.click();
+         return true;
+    }
+    catch (error) {
+      console.error('Find Owners button not found:', error);
+      return false;
+    }
 
   }
 }

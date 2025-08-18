@@ -2,6 +2,7 @@
 {
   "Owners": [
     { "firstName": "Anna", "lastName": "Muster", "address": "Hauptstr. 1", "city": "Essen", "telephone": "1234567890" },
-     { "firstName": "Michael", "lastName": "Nkongho", "address": "Hauptstr. 2", "city": "Essen", "telephone": "1234567892" }
+     { "firstName": "Michael", "lastName": "Nkongho", "address": "Hauptstr. 2", "city": "Essen", "telephone": "1234567892" },
+      { "firstName": "Betty", "lastName": "Davis", "address": "Hauptstr. 2", "city": "Essen", "telephone": "1234567822" }
   ]
 }
