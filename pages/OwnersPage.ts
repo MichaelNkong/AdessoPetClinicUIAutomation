@@ -122,7 +122,7 @@ export class OwnersPage {
          return true;
     }
     catch (error) {
-      console.error('failed to click add new pet link:', error);
+      console.error('failed to click linked text on table:', error);
       return false;
     }
 

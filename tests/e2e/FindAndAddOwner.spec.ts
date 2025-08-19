@@ -4,7 +4,7 @@ import { BasePage } from '../../pages/BasePage';
 import { OwnersPage } from '../../pages/OwnersPage';
 import owners from '../../core/test-data/owners.json';
 
-test.describe('New Owner', () => {
+test.describe('new owner', () => {
    test.describe.configure({ mode: 'serial' });
  
 let landingPage: LandingPage;
@@ -22,7 +22,7 @@ let ownerPage: OwnersPage;
   // It then clicks the Add Owner button to submit the form
   // Finally, it verifies that the owner has been added by checking the count of table entries
   // and the presence of the owner's name in the owner information
-  test('Click Find Owners and Add New Owner', async ({ page }) => {
+  test('click find owners and add new owner', async ({ page }) => {
   await  landingPage.clickFindOwners();
   await ownerPage.clickAddNewownerLink();
     await ownerPage.fillLasNameInInputField(owners.Owners[0].lastName);
@@ -36,7 +36,7 @@ let ownerPage: OwnersPage;
   // This test clicks on the Find Owners link, fills in the last name input field,
   // clicks the Find Owners button, and verifies that the owner information is displayed correctly
   // It checks that the count of table rows is as expected and that the owner's name is present in the owner information
-  test('Click Find Owners and verify Owner on page', async ({ page }) => {
+  test('click find owners and verify owner on page', async ({ page }) => {
     await  landingPage.clickFindOwners();
             await ownerPage.fillLasNameInInputField(owners.Owners[0].lastName);
                 await ownerPage.clickFindOwnersButton();

@@ -69,12 +69,33 @@ export class ApiRequestsBaseWrapper {
       });
     return response;
   }
+getApiHeadersWithToken(token: string, ifMatchValue?: string): Record<string, string> {
+  const headers: Record<string, string> = {
+    "Accept": "*/*",
+    "Content-Type": "application/json"
+  //  "Cookie": token,   // hier direkt der Session-Cookie-String
+  };
 
+  if (ifMatchValue) {
+    headers["If-Match"] = ifMatchValue;
+  }
+  return headers;
+}
   async getCookieTokenFromPage(page: Page) {
-    const cookies = await page.context().cookies();
-    const sessionCookie = cookies.find((cookie) => cookie.name === "KoerberSessionCookie");
-    const authCookie = cookies.find((cookie) => cookie.name === "KoerberAuthCookie");
-    return "KoerberSessionCookie=" + (sessionCookie?.value || "") + ";KoerberAuthCookie=" + (authCookie?.value || "");
+     const cookies = await page.context().cookies();
+
+  // JSESSIONID Cookie finden
+  const jsession = cookies.find((cookie) => cookie.name === "JSESSIONID");
+
+  // Optional: jenkins-timestamper-offset auch mitnehmen
+  const jenkinsOffset = cookies.find((cookie) => cookie.name === "jenkins-timestamper-offset");
+
+  // Cookie-String zurückgeben wie im Screenshot
+  let cookieString = "";
+  if (jenkinsOffset) cookieString += `jenkins-timestamper-offset=${jenkinsOffset.value};`;
+  if (jsession) cookieString += `JSESSIONID=${jsession.value};`;
+
+  return cookieString;
   }
 
   getHeaders(): any {

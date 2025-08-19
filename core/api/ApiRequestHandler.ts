@@ -1,12 +1,11 @@
 import { Page } from '@playwright/test';
 import { AxiosResponse } from 'axios';
 import { ApiRequestsBaseWrapper } from './ApiRequestBaseWrapper';
-import { EndPoints } from '../../core/endpoints/OdataEndpointPathEnum';
-import { Services } from '../../core/services/Service';
+import { EndPoints } from '../../core/api/endpoints/EndPoints';
+
 
 const apiBaseUrl = process.env.API_BASE_URL || "";
-const apiIdContext = process.env.API_ID_CONTEXT;
-const commonBasePathForApi = Services.OwnerService +'/';
+const endpoint =EndPoints.FindOwner;
 
 
 export class ApiRequestsForTestsWrapper extends ApiRequestsBaseWrapper {
@@ -19,28 +18,27 @@ export class ApiRequestsForTestsWrapper extends ApiRequestsBaseWrapper {
   
   // add new owner
   async addNewOwner(addNewOwnerData: any, token: any) {
-    await super.post(`${commonBasePathForApi}${EndPoints.NewOwner}`, addNewOwnerData, 201, this.getApiHeaders(token));
+    await super.post(`${apiBaseUrl}${EndPoints.NewOwner}`, addNewOwnerData, 200, this.getApiHeaders(token));
+  }
+  //find owner by last name
+  async findOwner(data: any, token: any) {
+    await super.get(`${EndPoints.FindOwner}`, data, 200, this.getApiHeaders(token));
   }
 
  
-  // get current context for WB100
- async getCurrentContext(token: any,siteData: any = undefined) {
-    const response = await super.get(`${commonBasePathForApi}${EndPoints.NewOwner}`, siteData, 200, this.getApiHeaders(token));
-    return (response as AxiosResponse<any, any>).data.value;
+getApiHeaders(token: string, ifMatchValue?: string) {
+  const headers: Record<string, string> = {
+    "Accept": "*/*",
+    "Content-Type": "application/json",
+    "Cookie": token   // token must be string: "name=value; name2=value2"
+  };
+
+  if (ifMatchValue) {
+    headers["If-Match"] = ifMatchValue;
   }
-  getApiHeaders(token: any, ifMatchValue: any = undefined) {
-    if (ifMatchValue === undefined) {
-      return {
-        "Content-Type": "application/json",
-        "Cookie": token,
-      };
-    }
-    return {
-      "Content-Type": "application/json",
-      "Cookie": token,
-      "If-Match": ifMatchValue
-    };
-  }
+
+  return headers;
+}
 
   enumToJson(enumObj: object): string {
     return JSON.stringify(
@@ -50,4 +48,5 @@ export class ApiRequestsForTestsWrapper extends ApiRequestsBaseWrapper {
       }, {} as Record<string, string>)
     );
   }
+
 }

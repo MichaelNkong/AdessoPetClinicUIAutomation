@@ -8,7 +8,7 @@ import pets from '../../core/test-data/pet.json';
 import owners from '../../core/test-data/owners.json';
 import { VisitLabels } from '../../core/enums/visit-labels.enum';
 import visit from '../../core/test-data/visit.json';
-test.describe('New Pet', () => {
+test.describe('new pet', () => {
  test.describe.configure({ mode: 'serial' });
  
 let landingPage: LandingPage;
@@ -28,7 +28,7 @@ let datePicker : DatePicker;
 // clicks the Find Owners button, and verifies that the owner information is displayed correctly
 // It checks that the count of table rows is as expected and that the owner's name is present in the owner information
   
-  test('Search Owner by Last name and Add New Pet', async ({ page }) => {
+  test('search owner by last name and add new pet', async ({ page }) => {
     if(await  landingPage.clickFindOwners()){
         await ownerPage.fillLasNameInInputField(owners.Owners[2].lastName);
              await ownerPage.clickFindOwnersButton();
@@ -44,13 +44,13 @@ let datePicker : DatePicker;
 
     }
     else {
-      throw new Error('Failed to click Find Owners');
+      throw new Error('failed to click find owners');
     }
   });
    
 
   
-  test('Search Owner by Last name and Add Visit', async ({ page }) => {
+  test('search owner by last name and add visit', async ({ page }) => {
     if(await  landingPage.clickFindOwners()){
         await ownerPage.fillLasNameInInputField(owners.Owners[2].lastName);
              await ownerPage.clickFindOwnersButton();
@@ -67,7 +67,7 @@ let datePicker : DatePicker;
 
     }
     else {
-      throw new Error('Failed to click Find Owners');
+      throw new Error('failed to click find owners');
     }
   });
    
