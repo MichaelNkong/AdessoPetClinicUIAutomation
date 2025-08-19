@@ -1,5 +1,5 @@
 import { Page, Locator, expect } from '@playwright/test';
-
+import { FindLabels } from '../core/enums/find-labels.enum';
 // This class represents the landing page of the application
 // It contains locators for elements on the landing page and methods to interact with them
 export class LandingPage {
@@ -9,7 +9,7 @@ export class LandingPage {
 
   constructor(page: Page) {
     this.page = page;
-    this.findowner = page.getByRole('link', { name: 'Find Owners' });
+    this.findowner = page.getByRole('link', { name: FindLabels.findownerslink });
 
   }
  /**
