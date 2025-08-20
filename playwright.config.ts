@@ -31,6 +31,8 @@ export default defineConfig({
     //['html'], // Playwright built-in HTML report
     ['allure-playwright'] // Allure report output
   ],
+   globalSetup: require.resolve('./core/utils/global/GlobalSetup'),
+  globalTeardown: require.resolve('./core/utils/global/GlobalTeardown'),
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
